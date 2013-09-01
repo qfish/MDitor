@@ -16,3 +16,5 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+0.1/lib/
+0.1/src/
