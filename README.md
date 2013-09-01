@@ -2,11 +2,15 @@
 
 MDtior is a web markdown editor with preview that is extremely easy to use. :)~
 
+You can visit the [website](http://github.pw/MDitor/) of it.
+
+it's based on [pagedown](http://code.google.com/p/pagedown/wiki/PageDown), a great JavaScript Markdown previewer.
+
 ## Useage
 
 Few code works. you can use just like below :
     
-### 1. simple [[demo]](demo.html)
+### 1. simple [[demo]](http://github.pw/MDitor/demo.html)
 
 * HTML:
     
@@ -23,7 +27,7 @@ Few code works. you can use just like below :
     </script>
     ```
 
-### 2. with highlight [[demo]](demo.highlight.html)
+### 2. with highlight [[demo]](http://github.pw/MDitor/demo.highlight.html)
 
 * HTML:
     
@@ -50,7 +54,7 @@ Few code works. you can use just like below :
     </script>
     ```
 
-### 3. custom editor style [[demo]](demo.custom.html)
+### 3. custom editor style [[demo]](http://github.pw/MDitor/demo.custom.html)
 
 * HTML:
 
@@ -70,7 +74,7 @@ Few code works. you can use just like below :
     </script>
     ```
 
-### 4. custom preview markdown style [[demo]](demo.markdown.html)
+### 4. custom preview markdown style [[demo]](http://github.pw/MDitor/demo.markdown.html)
 
 just add your custom markdown style. remeber add prefix ".wmd-preview" before you style.
 
@@ -83,4 +87,4 @@ just add your custom markdown style. remeber add prefix ".wmd-preview" before yo
 ##Don't forget 
 
 the buttons style based on the [bootstrap2](http://getbootstrap.com/2.3.2/), so you'd better keep bootstrap's style in your html 
-or you can custom them yourself by customizing editor style , this [[demo]](demo.custom.html).
+or you can custom them yourself by customizing editor style , this [[demo]](http://github.pw/MDitor/demo.custom.html).
