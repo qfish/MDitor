@@ -2,6 +2,8 @@
 
 MDtior is a web markdown editor with preview that is extremely easy to use. :)~
 
+You can visit the [website](http://github.pw/MDitor/) of it.
+
 ## Useage
 
 Few code works. you can use just like below :
