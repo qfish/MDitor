@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>PageDown Demo Page</title>
+        <link rel="stylesheet" type="text/css" href="http://lib.sinaapp.com/js/bootstrap/2.3.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="http://lib.sinaapp.com/js/bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
+    </head>
+    
+    <body>
+        <textarea id="editor" name="content"></textarea>
+        <br/>
+
+        <textarea id="editor2" name="content2"></textarea>
+        <br/>
+
+        <script type="text/javascript" src="mditor.min.js"></script>
+        <script type="text/javascript">
+
+            (function () {
+
+                var editor = new MDitor( "#editor" );
+
+                var editor3 = new MDitor( "#editor2" , { 
+                    width : 800,
+                    postfix: "-bee"
+                });
+
+            })();
+
+        </script>
+    </body>
+</html>
