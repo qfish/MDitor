@@ -1,0 +1,350 @@
+<!doctype html>
+<html>
+<title>CodeMirror: Markdown mode</title>
+<meta charset="utf-8" />
+
+<link rel="stylesheet" href="lib/codemirror/codemirror.css">
+<link rel="stylesheet" href="bootstrap.btn.css">
+
+<script src="lib/pagedown/Markdown.Converter.js"></script>
+<script src="lib/pagedown/Markdown.Extra.js"></script>
+
+<script src="lib/codemirror/codemirror.js"></script>
+<script src="lib/codemirror/continuelist.js"></script>
+<script src="lib/codemirror/xml.js"></script>
+<script src="lib/codemirror/markdown.js"></script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#mditor {
+    width: 800px;
+    height: 230px;
+}
+#mditor-toolbar {
+    width: 100%;
+    height: 30px;
+    margin: 0;
+}
+
+.mditor-button {
+  width: 20px;
+}
+
+#mditor-wrapper {
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+
+#mditor-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#mditor-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    border: none;
+}
+
+.CodeMirror {
+    height: 200px;
+}
+
+</style>
+
+<div id="mditor">
+    <div id="mditor-toolbar" class="mditor-toolbar btn-toolbar">
+        <!-- <div class="btn-group">
+            <a id="bold-button" class="btn mditor-button"><i class="icon-bold"></i></a>
+            <a id="italic-button" class="btn mditor-button"><i class="icon-italic"></i></a>
+            <a id="link-button" class="btn mditor-button"><i class="icon-globe"></i></a>
+            <a id="quote-button" class="btn mditor-button"><i class="icon-indent-left"></i></a>
+            <a id="code-button" class="btn mditor-button"><i class="icon-code"></i></a>
+            <a id="image-button" class="btn mditor-button"><i class="icon-picture"></i></a>
+            <a id="olist-button" class="btn mditor-button"><i class="icon-numbered-list"></i></a>
+            <a id="ulist-button" class="btn mditor-button"><i class="icon-list"></i></a>
+            <a id="heading-button" class="btn mditor-button"><i class="icon-text-height"></i></a>
+            <a id="hr-button" class="btn mditor-button"><i class="icon-hr"></i></a>
+            <a id="undo-button" class="btn mditor-button" class="disabled btn"><i class="icon-undo"></i></a>
+            <a id="redo-button" class="btn mditor-button" class="disabled btn"><i class="icon-share-alt"></i></a>
+        </div> -->
+        <div class="btn-group pull-right">
+            <a id="mditor-code-mode" class="btn active" style="border-bottom-left-radius:0;">Code</a>
+            <a id="mditor-preview-mode" class="btn" style="border-bottom-right-radius:0;">Preview</a>
+        </div>
+    </div>
+    <div id="mditor-wrapper" class="mditor-wrapper">
+        <textarea id="mditor-input" class="mditor-input" name="source"></textarea>
+        <iframe id="mditor-preview" class="mditor-preview"></iframe>
+    </div>
+</div>
+
+<script>
+
+var MDitor, postfixCounter = 0;
+
+if (typeof exports === "object" && typeof require === "function") // we're in a CommonJS (e.g. Node.js) module
+    MDitor = exports;
+else
+    MDitor = {};
+
+(function(){
+
+  var util = {}
+  
+  util.id = function( id ) {
+    return document.getElementById( id )
+  }
+
+  util.selector = function( selector ) {
+    return document.querySelector( selector )
+  }
+
+  function PanelCollection(postfix) {
+    this.editor  = util.id("mditor");
+    this.input   = util.id("mditor-input")
+    this.preview = util.id("mditor-preview")
+    this.toolbar = util.id("mditor-toolbar")
+    this.wrapper = util.id("mditor-wrapper")
+    this.codeModeTriger    = util.id("mditor-code-mode")
+    this.previewModeTriger = util.id("mditor-preview-mode")
+  }
+
+  function postfix(selector) { return selector + options.postfix }
+
+  MDitor = function( selector, options ) {
+
+    var MODE_CODE    = 0;
+    var MODE_PREVIEW = 1;
+
+    var that = this, style, editor, panels, options, converter, magic, origin, previewManager
+
+    this.html              = ""
+    this.source            = ""
+    this.mode              = MODE_CODE
+
+    options                = options || {}
+    options.name           = options.name || ""
+    options.width          = options.width || 550
+    options.height         = options.height || 300
+    options.postfix        = options.postfix || ( "-mditor-" + postfixCounter++ )
+    options.helpString     = options.helpString || null
+    options.useCustomStyle = options.useCustomStyle || false
+
+    // setup panels
+    panels = new PanelCollection(options.postfix);
+    origin = panels.input
+
+    /******************************************
+    *      Markdown Converter, CodeMirror
+    *******************************************/
+
+    // setup the converter
+    this.converter = converter = new Markdown.Converter()
+    Markdown.Extra.init(converter)
+
+    // setup the options for codemirror
+    var cmoptions = {
+      mode        : "markdown",
+      theme       : "default",
+      extraKeys   : { "Enter" : "newlineAndIndentContinueMarkdownList" },
+      lineNumbers : true,
+    }
+
+    // hide origin
+    origin.style.display = "none"
+    // setup the codemirror
+    editor = CodeMirror( function(element) {
+      // set the magic 
+      magic = panels.magic = element
+      // insert new editor before the origin textarea
+      origin.parentNode.insertBefore(magic, origin)
+    } , cmoptions )
+
+    previewManager = new PreviewManager(converter, editor, panels, function () {  });
+
+    /****************************************
+    *   update this.html and this.source  
+    ****************************************/
+
+    var delay = 0
+
+    editor.on("change", function() {
+      clearTimeout(delay)
+      delay = setTimeout(updateText, 500)
+    })
+      
+    function updateText() {
+      that.html = converter.makeHtml(editor.getValue())
+      that.source = editor.getValue()
+    }
+
+    setTimeout(updateText, 500);
+
+    /********************
+    *      toolbar  
+    ********************/
+
+    // setup the code mode toggle
+    var onCodeMode = function() {
+      if (that.mode == MODE_CODE) return
+      that.mode = MODE_CODE
+      panels.magic.style.display = "block"
+      panels.preview.style.display = "none"
+      panels.codeModeTriger.classList.add("active")
+      panels.previewModeTriger.classList.remove("active")
+
+      if (that.onCodeMode) {
+          that.onCodeMode(panels.magic, panels.preview)
+      }
+    }
+
+    var onPreviewMode = function() {
+      if (that.mode == MODE_PREVIEW) return
+      that.mode = MODE_PREVIEW
+      panels.magic.style.display = "none"
+      panels.preview.style.display = "block"
+      panels.codeModeTriger.classList.remove("active")
+      panels.previewModeTriger.classList.add("active")
+
+      previewManager.refresh(true);
+
+      if (that.onPreviewMode) {
+          that.onPreviewMode(panels.magic, panels.preview)
+      }
+    }
+
+    panels.codeModeTriger.onclick = onCodeMode
+    panels.previewModeTriger.onclick = onPreviewMode 
+  }
+
+  function PreviewManager(converter, editor, panels, previewRefreshCallback) {
+
+        var timeout
+        var elapsedTime
+        var oldInputText
+        var maxDelay = 1000
+        var startType = "delayed" // The other legal value is "manual"
+
+        var makePreviewHtml = function () {
+
+            // If there is no registered preview panel
+            // there is nothing to do.
+            if (!panels.preview)
+                return
+
+            var text = editor.getValue();
+            if (text && text == oldInputText) {
+                return // Input text hasn't changed.
+            }
+            else {
+                oldInputText = text
+            }
+
+            var prevTime = new Date().getTime()
+
+            text = converter.makeHtml(text)
+
+            // Calculate the processing time of the HTML creation.
+            // It's used as the delay time in the event listener.
+            var currTime = new Date().getTime()
+            elapsedTime = currTime - prevTime
+
+            pushPreviewHtml(text)
+        }
+
+        // setTimeout is already used.  Used as an event listener.
+        var applyTimeout = function () {
+
+            if (timeout) {
+                clearTimeout(timeout)
+                timeout = undefined
+            }
+
+            if (startType !== "manual") {
+
+                var delay = 0
+
+                if (startType === "delayed") {
+                    delay = elapsedTime
+                }
+
+                if (delay > maxDelay) {
+                    delay = maxDelay
+                }
+                timeout = setTimeout(makePreviewHtml, delay)
+            }
+        }
+
+        this.refresh = function (requiresRefresh) {
+
+            if (requiresRefresh) {
+                oldInputText = ""
+                makePreviewHtml()
+            }
+            else {
+                applyTimeout()
+            }
+        }
+
+        this.processingTime = function () {
+            return elapsedTime
+        }
+
+        var isFirstTimeFilled = true
+
+        var nonSuckyBrowserPreviewSet = function (text) {
+            var previewFrame = panels.preview
+            var preview = previewFrame.contentDocument || previewFrame.contentWindow.document
+            preview.open()
+            preview.writeln('<html><head>')
+            preview.writeln('<link rel="stylesheet" href="markdown.css">')
+            preview.writeln('</head><body class="markdown-body">')
+            preview.writeln(text)
+            preview.writeln('</body></html>')
+            preview.close()
+        }
+
+        var previewSetter
+
+        var previewSet = function (text) {
+            if (previewSetter)
+            {
+              previewSetter(text)
+            } else {
+              nonSuckyBrowserPreviewSet(text)
+              previewSetter = nonSuckyBrowserPreviewSet 
+            }
+        }
+
+        var pushPreviewHtml = function (text) {
+
+            if (panels.preview) {
+                previewSet(text)
+                previewRefreshCallback()
+            }
+
+            if (isFirstTimeFilled) {
+                isFirstTimeFilled = false
+                return
+            }
+        }
+    }
+
+  var editor = new MDitor( "#editor" )
+
+})()
+
+</script>
+</html>

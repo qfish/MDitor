@@ -1,4 +1,4 @@
-## MDitor 1.0
+## MDitor
 
 MDtior is a web markdown editor with preview that is extremely easy to use. :)~
 

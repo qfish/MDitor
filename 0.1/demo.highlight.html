@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>PageDown Demo Page</title>
+        <link rel="stylesheet" type="text/css" href="http://lib.sinaapp.com/js/bootstrap/2.3.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="http://lib.sinaapp.com/js/bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="markdown.css" />
+        <link rel="stylesheet" type="text/css" href="highlight.css" />
+    </head>
+    
+    <body>
+        <textarea id="editor" name="content"></textarea>
+    
+        <script type="text/javascript" src="mditor.min.js"></script>
+        <script type="text/javascript" src="highlight.js"></script>
+        <script type="text/javascript">
+
+            (function () {
+
+                var editor = new MDitor( "#editor" );
+                
+                editor.onPreviewMode = function( input, preview ) {
+                    var codes = preview.querySelectorAll("pre code");
+                    for (var i = codes.length - 1; i >= 0; i--) {
+                        hljs.highlightBlock(codes[i]);
+                    };
+                };
+            })();
+
+        </script>
+    </body>
+</html>

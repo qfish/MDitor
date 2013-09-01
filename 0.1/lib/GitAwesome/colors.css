@@ -1,0 +1,63 @@
+/*color-tags*/.red{color:#D14}
+/*color-tags*/.green{color:teal}
+/*color-tags*/.blue{color:#007DBC}
+/*color-tags*/.yellow{color:#FFDD07}
+/*color-tags*/.orange{color:#FF5E22}
+
+/* Flat UI Colors */
+/*.palette-*/y{background-color:#1abc9c; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/c{background-color:#16a085; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/d{background-color:#2ecc71; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/e{background-color:#27ae60; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/f{background-color:#3498db; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/g{background-color:#2980b9; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/h{background-color:#9b59b6; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/x{background-color:#8e44ad; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/g{background-color:#34495e; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/k{background-color:#2c3e50; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/l{background-color:#f1c40f; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/m{background-color:#f39c12; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/n{background-color:#e67e22; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/o{background-color:#d35400; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/v{background-color:#e74c3c; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/w{background-color:#c0392b; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/r{background-color:#ecf0f1; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/s{background-color:#bdc3c7; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/t{background-color:#95a5a6; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+/*.palette-*/u{background-color:#7f8c8d; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px;}
+
+ /*Flat UI Colors */
+/*.palette-turquoise{background-color:#1abc9c; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-greensea{background-color:#16a085; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-emerald{background-color:#2ecc71; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-nephritis{background-color:#27ae60; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-peterriver{background-color:#3498db; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-belizehole{background-color:#2980b9; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-amethyst{background-color:#9b59b6; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-wisteria{background-color:#8e44ad; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-wetasphalt{background-color:#34495e; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-midnightblue{background-color:#2c3e50; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-sunflower{background-color:#f1c40f; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-orange{background-color:#f39c12; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-carrot{background-color:#e67e22; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-pumpkin{background-color:#d35400; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-alizarin{background-color:#e74c3c; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-pomegranate{background-color:#c0392b; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-clouds{background-color:#ecf0f1; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-silver{background-color:#bdc3c7; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-concrete{background-color:#95a5a6; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+/*.palette-asbestos{background-color:#7f8c8d; text-shadow:0 1px 0 #333; color: white; padding: 5px; font-size: 14px; border-radius: 5px; margin-right: 10px;}*/
+
+
+@font-face{font-family:'FontAwesome';src:url(font/fontawesome-webfont.eot?v=3.0.1);src:url(font/fontawesome-webfont.eot?#iefix&v=3.0.1) format("embedded-opentype)","url(font/fontawesome-webfont.woff?v=3.0.1") format("woff)","url(font/fontawesome-webfont.ttf?v=3.0.1") format("truetype");font-weight:400;font-style:normal}
+todo,done,cancel,home,item{display:block;font-size:20px;font-family:FontAwesome;font-weight:400;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased;display:inline;width:auto;height:auto;line-height:normal;vertical-align:baseline;background-image:none;background-position:0 0;background-repeat:repeat;margin-top:0}
+todo{color:#D14}
+done{color:teal}
+cancel{color:#FFDD07}
+home{color:#007DBC}
+item{color:#FF5E22}
+todo:before{content:"\f00d"}
+done:before{content:"\f00c"}
+cancel:before{content:"\f059"}
+home:before{content:"\f015"}
+item:before{content:"\f00b"}

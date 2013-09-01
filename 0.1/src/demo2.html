@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>PageDown Demo Page</title>
+        <link rel="stylesheet" type="text/css" href="http://lib.sinaapp.com/js/bootstrap/2.3.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="http://lib.sinaapp.com/js/bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="GitAwesome.css" />
+        <link rel="stylesheet" type="text/css" href="MDitor.css" />
+    </head>
+    
+    <body>
+        <textarea id="editor" name="content"></textarea>
+        <script type="text/javascript" src="pagedown/MDitor.js"></script>
+        <script type="text/javascript">
+            (function () {
+                var editor = new MDitor( "#editor", "markdown" );
+            })();
+        </script>
+    </body>
+</html>

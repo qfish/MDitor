@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>PageDown Demo Page</title>
+        
+        <link rel="stylesheet" type="text/css" href="mystyle.css" />
+        <link rel="stylesheet" type="text/css" href="GitAwesome.css" />
+        <style>
+
+.wmd-panel
+{
+    width: 100%;
+    min-width: 600px;
+}
+
+#wmd-button-bar
+{
+    width: 100%;
+    padding-top: 10px; 
+    margin-bottom: 10px;
+}
+.wmd-button-bar {
+    width: 100%;
+    background-color: Silver; 
+}
+.wmd-editor-wrapper 
+{
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+.wmd-input 
+{ 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border: 1px solid DarkGray;
+    font-size: 14px;
+}
+.wmd-preview 
+{
+    position: absolute;
+    display: none;
+}
+.wmd-button-row 
+{
+    position: relative; 
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    padding: 0px;  
+    height: 20px;
+}
+.wmd-spacer
+{
+    width: 1px; 
+    height: 20px; 
+    margin-left: 14px;
+    
+    position: absolute;
+    background-color: Silver;
+    display: inline-block; 
+    list-style: none;
+}
+
+.wmd-button {
+
+    width: 20px;
+    height: 20px;
+    padding-left: 2px;
+    padding-right: 3px;
+    position: absolute;
+    display: inline-block;
+    list-style: none;
+    cursor: pointer;
+}
+
+.wmd-button > span {
+    background-image: url(MDitor-buttons.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.wmd-spacer1
+{
+    left: 50px;
+}
+.wmd-spacer2
+{
+    left: 175px;
+}
+.wmd-spacer3
+{
+    left: 300px;
+}
+
+#mode-toggle
+{
+    width: 120px;
+    height: 20px;
+    position: absolute;
+    display: inline-block;
+    list-style: none;
+    right: 0px;
+    top: -5px;
+}
+
+.wmd-prompt-background
+{
+    background-color: Black;
+}
+
+.wmd-prompt-dialog
+{
+    border: 1px solid #999999;
+    background-color: #F5F5F5;
+}
+
+.wmd-prompt-dialog > div {
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.wmd-prompt-dialog > form > input[type="text"] {
+    border: 1px solid #999999;
+    color: black;
+}
+
+.wmd-prompt-dialog > form > input[type="button"]{
+    border: 1px solid #888888;
+    font-family: trebuchet MS, helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+        </style>
+        <script type="text/javascript" src="pagedown/Markdown.Converter.js"></script>
+        <script type="text/javascript" src="pagedown/Markdown.Sanitizer.js"></script>
+        <script type="text/javascript" src="pagedown/Markdown.Editor.js"></script>
+        <script type="text/javascript" src="pagedown/Markdown.Extra.js"></script>
+    </head>
+    
+    <body>
+        
+        
+        <textarea id="editor" name="content"></textarea>
+
+        <script type="text/javascript">
+            
+            (function () {
+
+            var MDitor = function( selector, markdown ) {
+
+                this.html = "";
+                this.source = "";
+
+                var originEditor = document.querySelector(selector);
+                var originWrapper = originEditor.parentElement;
+                var newEditor = document.createElement('div');
+
+                originEditor.style.display = "none";
+
+                newEditor.innerHTML = '<div id="wmd-button-bar"></div><div class="wmd-editor-wrapper"><textarea class="wmd-input" name="' + markdown + '" id="wmd-input"></textarea><div id="wmd-preview" class="wmd-preview"></div></div>';
+
+                originWrapper.appendChild( newEditor );
+
+                var converter = new Markdown.Converter();
+
+                // converter.hooks.chain("preConversion", function (text) {
+                //     return text.replace(/\b(a\w*)/gi, "*$1*");
+                // });
+
+                // converter.hooks.chain("plainLinkText", function (url) {
+                //     return "This is a link to " + url.replace(/^https?:\/\//, "");
+                // });
+
+                var editor = new Markdown.Editor(converter);
+
+                editor.run();
+
+                var wmd_button_row = document.querySelector("#wmd-button-row");
+                var toggle = document.createElement("li");
+                toggle.id = "mode-toggle";
+                toggle.style.right = "0px";
+                toggle.innerHTML = '<div id="#edit-mode" class="btn-group"><buttton class="btn active" id="mode-code" class="selected">Code</buttton><buttton class="btn" href="#" id="mode-preview">Preview</buttton></div>';
+                wmd_button_row.appendChild( toggle );
+
+                var modeCode = document.querySelector("#mode-code");
+                var modePreview = document.querySelector("#mode-preview");
+                var input = document.querySelector("#wmd-input");
+                var preview = document.querySelector("#wmd-preview");
+
+                editor.hooks.onPreviewRefresh = function(){
+                    this.source = input.value;
+                    this.html   = preview.innerHTML; 
+                    originEditor.value = this.html;
+                };
+
+                var isCodeMode = true;
+
+                var onCodeMode = function () {
+                    if ( isCodeMode ) return
+                    isCodeMode = true
+                    input.style.display = "block"
+                    preview.style.display = "none"
+                    modeCode.classList.add("active")
+                    modePreview.classList.remove("active")
+                }
+
+                var onPreviewMode = function () {
+                    if ( !isCodeMode ) return
+                    isCodeMode = false
+                    input.style.display = "none"
+                    preview.style.display = "block"
+                    modeCode.classList.remove("active")
+                    modePreview.classList.add("active")
+                }
+
+                modeCode.onclick = onCodeMode
+                modePreview.onclick = onPreviewMode
+            }
+
+            var editor = new MDitor( "#editor", "markdown" );
+
+            })();
+        </script>
+    </body>
+</html>

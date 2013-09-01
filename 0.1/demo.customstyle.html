@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>PageDown Demo Page</title>
+        <link rel="stylesheet" type="text/css" href="http://lib.sinaapp.com/js/bootstrap/2.3.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="custom.css" />
+    </head>
+    
+    <body>
+        <textarea id="editor" name="content"></textarea>
+        <br/>
+
+        <script type="text/javascript" src="mditor.min.js"></script>
+        <script type="text/javascript">
+
+            (function () {
+
+                var editor = new MDitor( "#editor" , { 
+                    useCustomStyle : true
+                });
+
+            })();
+
+        </script>
+    </body>
+</html>
